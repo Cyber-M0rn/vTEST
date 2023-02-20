@@ -1,0 +1,25 @@
+Index: V2PPY2/.gitattributes
+===================================================================
+diff --git a/V2PPY2/.gitattributes b/V2PPY2/.gitattributes
+new file mode 100644
+--- /dev/null	
++++ b/V2PPY2/.gitattributes	
+@@ -0,0 +1,2 @@
++# Auto detect text files and perform LF normalization
++* text=auto
+Index: Cyber-M0rn/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from fastapi import FastAPI\r\nfrom typing import Optional\r\nfrom pydantic import BaseModel\r\n\r\napp=FastAPI()\r\n@app.get('/user/')\r\ndef User(limit=10,published: bool=True, sort: Optional[str]=None):\r\n    if published:\r\n        return{'data': f'{limit}published blog list from db'}\r\n    else:\r\n        return {'data': f'{limit}all blog list from db'}\r\ndef unpublised():\r\n    return {'data': 'all unpublished blogs'}\r\n\r\n@app.post('/user/')\r\ndef create_blog():\r\n    return {'data': \"Blog is create\"}\r\n\r\n\r\n@app.delete('/User/{ID}')\r\nasync def delete_item(item_id:int, q: str=None):\r\n    from http.client import HTTPException\r\n    raise HTTPException(status_code=404, detail=\"Item not found\")\r\n    delete_item_from_db(item_id)\r\n    return {\"message\": \"Item deleted\"}\r\nclass User(BaseModel):\r\n    title :str\r\n    body: str\r\n    publised: Optional[bool]\r\n@app.get('By {ID}')\r\ndef user_id(id,limit=10):\r\n    return{'message': {'1,2,3,4,5'}}\r\n\r\n@app.put('/user/{ID}')\r\ndef update(user: User):\r\n    username=user.username\r\n    user.db[username]=user_id.dict()\r\n    return {'data': f'Successfully updated user: {username}'}\r\n
+===================================================================
+diff --git a/Cyber-M0rn/main.py b/Cyber-M0rn/main.py
+--- a/Cyber-M0rn/main.py	
++++ b/Cyber-M0rn/main.py	
+@@ -1,5 +1,6 @@
+-from fastapi import FastAPI
+ from typing import Optional
++
++from fastapi import FastAPI
+ from pydantic import BaseModel
+ 
+ app=FastAPI()
